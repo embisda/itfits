@@ -1,5 +1,6 @@
 <?php
-define('TOKEN', '*');
+require_once 'config.php';
+define('TOKEN', $token);
 define('BASE_URL', 'https://api.telegram.org/bot' . TOKEN . '/');
 
 $data = json_decode(file_get_contents('php://input'), TRUE);
@@ -18,7 +19,7 @@ $message = mb_strtolower(($data['text'] ? $data['text'] : $data['data']),'utf-8'
 
 $user = $data['from'];
 
-$chatCollector = '-100';
+$chatCollector = $chatCollectorID;
 
 $mysqli = new mysqli($dbhost, $dbuser, $dbpwd, $dbname);
 if ($mysqli->connect_errno) {	// если подключиться не получилось - сообщаем админу
